@@ -1,0 +1,42 @@
+{
+  "format": "interlayer.adapter",
+  "schema_version": 1,
+  "type": "declarative",
+  "connections": [
+    {
+      "id": "lamp",
+      "driver": "http",
+      "label": "Acme Lamp local API",
+      "url": "http://127.0.0.1:{{plugin.port}}",
+      "auth": { "type": "bearer", "token": "{{plugin.token}}" },
+      "timeout_ms": 1500
+    }
+  ],
+  "sources": {
+    "lamp.state": {
+      "description": "The lamp's state: { power, brightness, name }.",
+      "connection": "lamp",
+      "mode": "poll",
+      "request": { "method": "GET", "path": "/api/state" },
+      "data_path": "state",
+      "offline": { "status_text": "Acme Lamp is not running" }
+    }
+  },
+  "actions": {
+    "lamp.toggle_power": {
+      "description": "Turns the lamp on or off.",
+      "connection": "lamp",
+      "request": { "method": "POST", "path": "/api/power/toggle" },
+      "ok_path": "ok",
+      "error_path": "error"
+    },
+    "lamp.set_brightness": {
+      "description": "Sets the brightness (0-100).",
+      "connection": "lamp",
+      "request": { "method": "POST", "path": "/api/brightness", "body": { "value": "{{value|number}}" } },
+      "ok_path": "ok",
+      "error_path": "error"
+    }
+  },
+  "permissions": { "secrets": ["token"] }
+}

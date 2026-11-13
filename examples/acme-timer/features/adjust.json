@@ -1,0 +1,21 @@
+{
+  "format": "interlayer.aol",
+  "schema_version": 1,
+  "id": "adjust",
+  "name": "Adjust",
+  "host_type": "inner",
+  "source": { "data_type": "value", "source_identifier": "timer.state" },
+  "mapping": {
+    "rules": [
+      { "source_field": "remaining_s", "destination_field": "value" },
+      { "source_field": "text", "destination_field": "label" }
+    ]
+  },
+  "interaction": {
+    "compatible_interactions": ["value_slide", "value_dial"],
+    "input_kind": "value",
+    "input_parameters": { "step": 1 }
+  },
+  "action": { "action_identifier": "timer.adjust", "parameters": { "delta": "{{delta}}" } },
+  "command": { "kind": "value", "name": "Timer Adjust" }
+}

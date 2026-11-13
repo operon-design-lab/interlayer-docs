@@ -1,0 +1,23 @@
+{
+  "format": "interlayer.plugin",
+  "schema_version": 1,
+  "id": "acme-lamp",
+  "name": "Acme Lamp",
+  "version": "0.1.0",
+  "description": "Power, brightness and status of the Acme Lamp app's local HTTP API.",
+  "requires": {
+    "interlayer": ">=0.1.0",
+    "application": "Acme Lamp 2.x with its local API enabled"
+  },
+  "features": ["power", "brightness", "status"],
+  "settings": [
+    { "key": "port", "type": "number", "label": "Port", "default": 8765, "description": "Acme Lamp > Settings > Local API > Port." },
+    { "key": "token", "type": "secret", "label": "API token", "description": "Acme Lamp > Settings > Local API > Token. Kept in the macOS Keychain." }
+  ],
+  "setup": [
+    { "type": "instructions", "title": "Turn on the local API", "text": "In Acme Lamp: Settings > Local API > Enable. Note the port and the token." },
+    { "type": "settings", "title": "Enter the port and the token" },
+    { "type": "approve", "title": "Review the Adapter" },
+    { "type": "test", "title": "Test the connection", "source": "lamp.state" }
+  ]
+}

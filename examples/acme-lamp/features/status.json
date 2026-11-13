@@ -1,0 +1,22 @@
+{
+  "format": "interlayer.aol",
+  "schema_version": 1,
+  "id": "status",
+  "name": "Status",
+  "host_type": "inner",
+  "source": { "data_type": "value", "source_identifier": "lamp.state" },
+  "mapping": {
+    "rules": [
+      { "source_field": "name", "destination_field": "name" },
+      { "source_field": "brightness", "destination_field": "brightness" },
+      { "source_field": "status_text", "destination_field": "offline" }
+    ]
+  },
+  "interaction": { "compatible_interactions": [], "input_parameters": {} },
+  "command": {
+    "kind": "display",
+    "name": "Lamp Status",
+    "lines": ["{name}", "{brightness}%", "{offline}"],
+    "layout": "stacked"
+  }
+}

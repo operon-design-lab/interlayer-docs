@@ -1,0 +1,15 @@
+{
+  "format": "interlayer.aol",
+  "schema_version": 1,
+  "id": "remaining",
+  "name": "Remaining",
+  "host_type": "inner",
+  "source": { "data_type": "value", "source_identifier": "timer.state", "poll_interval_ms": 1000 },
+  "mapping": {
+    "rules": [
+      { "source_field": "text", "destination_field": "value" }
+    ]
+  },
+  "interaction": { "compatible_interactions": [], "input_parameters": {} },
+  "command": { "kind": "display", "name": "Timer Remaining" }
+}

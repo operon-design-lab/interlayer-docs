@@ -1,0 +1,22 @@
+{
+  "format": "interlayer.plugin",
+  "schema_version": 1,
+  "id": "acme-timer",
+  "name": "Acme Timer",
+  "version": "0.1.0",
+  "description": "Adjust and show the Acme Timer app's countdown (script Adapter).",
+  "requires": {
+    "interlayer": ">=0.1.0",
+    "application": "Acme Timer 1.x with its local API enabled"
+  },
+  "features": ["adjust", "remaining"],
+  "settings": [
+    { "key": "port", "type": "number", "label": "Port", "default": 8766 },
+    { "key": "step_seconds", "type": "number", "label": "Seconds per step", "default": 10 }
+  ],
+  "setup": [
+    { "type": "settings", "title": "Check the port" },
+    { "type": "approve", "title": "Review the script Adapter" },
+    { "type": "test", "title": "Test the connection", "source": "timer.state" }
+  ]
+}

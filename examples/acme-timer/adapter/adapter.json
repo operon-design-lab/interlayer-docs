@@ -1,0 +1,15 @@
+{
+  "format": "interlayer.adapter",
+  "schema_version": 1,
+  "type": "script",
+  "entry": "adapter.mjs",
+  "connections": [
+    { "id": "timer", "driver": "http", "label": "Acme Timer local API", "url": "http://127.0.0.1:{{plugin.port}}", "timeout_ms": 1500 }
+  ],
+  "sources": {
+    "timer.state": { "description": "remaining_s, running, text, connected." }
+  },
+  "actions": {
+    "timer.adjust": { "description": "Adds parameters.delta (steps) x step_seconds to the countdown." }
+  }
+}

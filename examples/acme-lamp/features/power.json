@@ -1,0 +1,21 @@
+{
+  "format": "interlayer.aol",
+  "schema_version": 1,
+  "id": "power",
+  "name": "Power",
+  "host_type": "inner",
+  "source": { "data_type": "value", "source_identifier": "lamp.state", "poll_interval_ms": 1000 },
+  "mapping": {
+    "rules": [
+      { "source_field": "power", "destination_field": "value", "transform": "boolean" },
+      { "source_field": "name", "destination_field": "label" }
+    ]
+  },
+  "interaction": { "compatible_interactions": ["single_button"], "input_kind": "none", "input_parameters": {} },
+  "action": { "action_identifier": "lamp.toggle_power", "parameters": {} },
+  "command": {
+    "kind": "toggle",
+    "name": "Lamp Power",
+    "states": { "off": { "label": "Lamp Off" }, "on": { "label": "Lamp On" } }
+  }
+}

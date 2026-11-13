@@ -1,0 +1,51 @@
+# InterLayer
+
+> InterLayer is a macOS app (Apple Silicon) that shows a configurable on-screen control panel (RUN) above other apps. Parts (buttons, sliders, dials) run Commands such as keyboard shortcuts, media keys, text, opening apps, and live Plugin actions. Panels are built in Studio. These docs cover version 0.1.0-beta.1 only; features not described here are not available.
+
+Official site: https://inter-layer.app
+Rules for AI assistants: docs/ai-assistant-guide.md
+
+## Getting Started
+
+- [Installation](docs/getting-started/installation.md): requirements (Apple Silicon, macOS 26+), download, install, update, uninstall
+- [First launch](docs/getting-started/first-launch.md): choosing a Project folder, starter Profiles and Packs
+- [Permissions](docs/getting-started/permissions.md): Accessibility, Automation (Music), Notifications, Keychain
+- [Basic operation](docs/getting-started/basic-operation.md): using RUN, making a first button in Studio, Layers vs Profiles
+
+## User Guide
+
+- [Concepts](docs/user-guide/concepts.md): Project/Workspace, Profile, Layout, Part, Zone, Layer, Binding, Interaction, Page, Command, Executor, Pack, Design, Plugin
+- [RUN](docs/user-guide/run.md): operating Parts, corners and ••• controls, collapsed view, RUN Menu, RUN Settings, Cursor Popup
+- [Studio](docs/user-guide/studio.md): window layout, saving, creating and opening Projects
+- [Profiles, Layers and Layout](docs/user-guide/profiles-layers-layout.md): Profile properties, own/shared Layout, Surface Size, Layers, Part types, Decoration Parts
+- [Parts and Interactions](docs/user-guide/parts-and-interactions.md): Single Button, Grid/Slide Buttons, Value Slider/Dial (Absolute/Relative), Dial Select, Area Radial, XY Pad, Data Display, Text/Image, Commit Methods
+- [Commands](docs/user-guide/commands.md): Command Browser and Editor; Keyboard, Mouse, System, Open, Text, Internal, Multi Action, MIDI Out, CLI
+- [Labels, icons and Display](docs/user-guide/labels-icons-display.md): labels, icon import, Image Packs, Display overrides, Per State visuals
+- [Packs and the Library](docs/user-guide/packs.md): Command/Icon/Image/Design Packs, Pack kinds, Pack Manager, starter Packs
+- [Design](docs/user-guide/design.md): Design Packs, Design Studio tabs
+- [Plugins](docs/user-guide/plugins.md): built-in macOS System and Apple Music Plugins, Plugin Command kinds, Plugin Studio, approving Adapters and built-in permissions
+- [Import and Export](docs/user-guide/import-export.md): .olcommands, .olicons, .olimages, .oldesign, .olprofile, .interlayer-plugin
+- [Data locations](docs/user-guide/data-locations.md): Project folder files, ~/Library/Application Support/InterLayer, backup and reset
+- [Current beta limitations](docs/user-guide/limitations.md): what is not available
+
+## Developer Guide (Plugins)
+
+- [Overview](docs/developer-guide/README.md): architecture (features, Sources, Actions, Adapter), workflow
+- [Package structure](docs/developer-guide/package-structure.md): allowed files and folders, limits, .interlayer-plugin ZIP
+- [Manifest](docs/developer-guide/manifest.md): plugin.json keys, settings, setup steps, requires, permissions.builtin (built-in permission groups: system_volume.read/.control, running_apps.read, app.activate, music.read/.control)
+- [Features](docs/developer-guide/features.md): feature file fields, command kinds (value, toggle, collection, display, xy), mapping, data shapes, action templates ({{value}}, {{delta}}, {{item.id}}, {{dx}}, {{dy}})
+- [Declarative Adapter](docs/developer-guide/declarative-adapter.md): adapter.json connections, HTTP poll/long_poll and WebSocket event Sources, Actions, templates and casts
+- [Script Adapter](docs/developer-guide/script-adapter.md): createAdapter(api), api members, sandbox, lifecycle and timeouts
+- [Security](docs/developer-guide/security.md): approval model, built-in permissions (declare + user approval), Keychain secrets, sandbox limits, author rules
+- [Icons](docs/developer-guide/icons.md): bundled icons/icons.json, requires.icon_packs
+- [Testing and distribution](docs/developer-guide/testing-and-distribution.md): Import Folder, approval, error codes, Export
+
+## Examples
+
+- [acme-lamp](examples/acme-lamp/): declarative Plugin (toggle, value, display, secret setting)
+- [acme-timer](examples/acme-timer/): script Plugin (relative value, display, api.changed)
+
+## Optional
+
+- [Troubleshooting](docs/troubleshooting.md): permissions, Sidecar and touch input, Input Troubleshooting, Plugins, updates
+- [AI assistant guide](docs/ai-assistant-guide.md): answering rules and a goal-to-feature map
