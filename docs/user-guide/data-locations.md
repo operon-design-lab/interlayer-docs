@@ -7,8 +7,8 @@ A Project is the folder you chose. It contains:
 | File | Contents |
 |---|---|
 | `project.json` | The Project: name, Profiles, default Profile, and the Packs and Designs it refers to |
-| `plate.json` | The shared Layout |
-| `plates/plate_<profile>.json` | A Profile's own Layout (if it has one) |
+| `plate.json` | The Project's base Layout record (required by the file format; no Profile uses it) |
+| `plates/plate_<profile>.json` | Each Profile's Layout |
 | `profile_<id>.json` | One per Profile: its Layers and Bindings |
 | `.pitsboard-backup/` | Backups made when an older Project was adjusted on load |
 

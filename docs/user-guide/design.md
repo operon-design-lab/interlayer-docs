@@ -4,7 +4,7 @@ A **Design Pack** sets the look of the overlay: colors, borders, materials, back
 
 ## Where a Design is chosen
 
-- **Default Design** of the Project (chosen when you create it; change it in Studio ▸ **Settings**).
+- **Default Design** of each Profile's Layout (Profile properties ▸ **Default Design**). Settings' Default Design is what a new Profile's Layout starts with.
 - **Layer Design** for a single Layer (Layer properties).
 - **Design Class** for a single Part (Edit: Layout), if the Design defines classes.
 

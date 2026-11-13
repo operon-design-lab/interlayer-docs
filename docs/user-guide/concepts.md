@@ -9,7 +9,7 @@ You build the panel in **Studio** and use it in **RUN**.
 ```
 Project / Workspace (a folder)
  └─ Profile               a complete panel; RUN shows one at a time
-     ├─ Layout            where the Parts are (shared by Profiles, or the Profile's own)
+     ├─ Layout            where the Parts are (each Profile has its own)
      │   └─ Part          a button, slider, ring …; has one or more Zones
      └─ Layer             one set of assignments for the same Parts
          └─ Binding       on one Part + Zone: an Interaction and its Commands
@@ -26,8 +26,8 @@ Library (shared by all Projects)
 | Term | Meaning |
 |---|---|
 | **Project / Workspace** | A folder that holds one InterLayer setup. RUN calls it a *Project*; Studio calls it a *Workspace*. They are the same thing. |
-| **Profile** | A complete panel with its own Layers and, optionally, its own Layout and size. RUN shows one Profile at a time. |
-| **Layout** | The positions, sizes and types of the Parts. By default all Profiles share one Layout. |
+| **Profile** | A complete panel with its own Layers and its own Layout. RUN shows one Profile at a time. |
+| **Layout** | The positions, sizes and types of the Parts, the Surface Size and the Default Design. Each Profile has its own; Profiles never share one. |
 | **Surface** | The drawing area of the panel, in pixels (for example 800 × 480). |
 | **Part** | One control on the Surface. Types: `single_rect`, `single_circle`, `slider`, `ring`, `dual_circle`, `triple_circle`, and `decoration` (display only). |
 | **Zone** | A touchable region of a Part. Most Parts have one (`main`). `dual_circle` has `outer` and `center`; `triple_circle` has `outer`, `middle` and `center`. |

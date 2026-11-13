@@ -6,7 +6,10 @@ A Profile is a complete panel. RUN shows one Profile at a time.
 
 In Studio's **Profiles** list:
 
-- **＋ ▸ New Profile** adds a blank Profile. **＋ ▸ Import Profile…** imports an exported Profile (see [Import and Export](import-export.md)).
+- **＋ ▸ New Profile…** opens the New Profile dialog:
+  - **Empty Profile** — a new Profile with its own empty Layout (from the Workspace Defaults in **Settings**).
+  - **Copy Layout from Existing Profile** — choose a **Source Profile**. The new Profile gets a copy of its Layout only: the Parts (types, positions, sizes), Surface Size and Default Design. Layers, Bindings and Commands start new, with no Part assigned.
+- **＋ ▸ Import Profile…** imports an exported Profile (see [Import and Export](import-export.md)).
 - **↑ / ↓** change the order.
 - The **gear** on the selected Profile opens its properties:
 
@@ -15,18 +18,17 @@ In Studio's **Profiles** list:
 | **Profile name** + **Rename** | Change the name. |
 | **Profile icon** (Choose… / Clear) | The icon shown for this Profile in the Profile Launcher. |
 | **Active in RUN** | Turn off to keep the Profile in the Project but not show it in RUN. |
-| **Duplicate** | A complete copy. |
+| **Duplicate** | A complete copy: Layout, Layers, Bindings and Design settings. |
 | **Delete Profile** | Delete it. |
 | **Export Profile…** | Save it as a `.olprofile` file. |
-| **Own Layout for this Profile / Use shared Layout** | See below. |
-| **Surface Size** | Preset or **Width (px)** / **Height (px)** (64–8192). Changing the size does not move Parts. The change applies to every Profile that shares the same Layout. |
+| **Surface Size** | Preset or **Width (px)** / **Height (px)** (64–8192). Changing the size does not move Parts; Parts left outside the Surface are reported by Validation. |
+| **Default Design** | The Layout's Design, used by every Layer that has no Design of its own. |
 
-### Own or shared Layout
+### Every Profile has its own Layout
 
-By default, all Profiles share one Layout (the same Parts in the same places).
+Each Profile has its own Layout. Editing Parts, Surface Size or Default Design changes only the selected Profile; Profiles never share or sync a Layout. To reuse a Layout, create a new Profile with **Copy Layout from Existing Profile**, or **Duplicate** the whole Profile.
 
-- **Own Layout for this Profile** gives the Profile its own copy of the Layout. Its Bindings are kept.
-- **Use shared Layout** returns it to the shared Layout.
+Projects made with an earlier beta, where several Profiles could share one Layout, are updated when opened: each of those Profiles gets its own copy of the Layout, so nothing changes in what they show or do. InterLayer says *Project updated for compatibility*; the change is written at the next **Save**, and a backup of the previous files is kept in the Project folder (`.pitsboard-backup/`).
 
 ## Layers
 
@@ -36,7 +38,7 @@ In the **Layers** list:
 
 - **＋** adds a blank Layer.
 - **↑ / ↓** change the order. *Next Layer* / *Previous Layer* follow this order.
-- The **gear** opens: **Layer name** + **Rename**, **Duplicate**, **Delete**, and **Layer Design** (a Design for this Layer, or *Use Plate Default* for the Project's Default Design).
+- The **gear** opens: **Layer name** + **Rename**, **Duplicate**, **Delete**, and **Layer Design** (a Design for this Layer, or *Use Plate Default* for the Profile's Layout Default Design).
 
 ## Layout: adding and arranging Parts
 

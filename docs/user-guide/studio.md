@@ -7,7 +7,7 @@ Studio (window title *Overlay Studio*) is the editor. Open it from the RUN Menu 
 | Area | Contents |
 |---|---|
 | **Header** | **Open in Design Studio**, **New**, **Open**, **Settings** (Workspace name and the defaults new Profiles start from), the Project folder name, **Save**, **Run**. |
-| **Left column** | **Profiles** (↑ ↓ to reorder, **＋** for *New Profile* / *Import Profile…*) and **Layers** (↑ ↓, **＋**). The gear on the selected row opens its properties. |
+| **Left column** | **Profiles** (↑ ↓ to reorder, **＋** for *New Profile…* / *Import Profile…*) and **Layers** (↑ ↓, **＋**). The gear on the selected row opens its properties. |
 | **Center** | **Workspace** view: **Preview** (the Surface with its Parts), **Commands** (the Command Browser), or **Split** (both). |
 | **Right column (Inspector)** | Edit mode: **Binding**, **Layout** or **Command**. |
 

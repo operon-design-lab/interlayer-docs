@@ -17,7 +17,7 @@ Rules for AI assistants: docs/ai-assistant-guide.md
 - [Concepts](docs/user-guide/concepts.md): Project/Workspace, Profile, Layout, Part, Zone, Layer, Binding, Interaction, Page, Command, Executor, Pack, Design, Plugin
 - [RUN](docs/user-guide/run.md): operating Parts, corners and ••• controls, collapsed view, RUN Menu, RUN Settings, Cursor Popup
 - [Studio](docs/user-guide/studio.md): window layout, saving, creating and opening Projects
-- [Profiles, Layers and Layout](docs/user-guide/profiles-layers-layout.md): Profile properties, own/shared Layout, Surface Size, Layers, Part types, Decoration Parts
+- [Profiles, Layers and Layout](docs/user-guide/profiles-layers-layout.md): Profile properties, New Profile (Empty / Copy Layout), every Profile's own Layout, Surface Size, Default Design, Layers, Part types, Decoration Parts
 - [Parts and Interactions](docs/user-guide/parts-and-interactions.md): Single Button, Grid/Slide Buttons, Value Slider/Dial (Absolute/Relative), Dial Select, Area Radial, XY Pad, Data Display, Text/Image, Commit Methods
 - [Commands](docs/user-guide/commands.md): Command Browser and Editor; Keyboard, Mouse, System, Open, Text, Internal, Multi Action, MIDI Out, CLI
 - [Labels, icons and Display](docs/user-guide/labels-icons-display.md): labels, icon import, Image Packs, Display overrides, Per State visuals
