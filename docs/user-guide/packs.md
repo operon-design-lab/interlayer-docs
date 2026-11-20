@@ -15,7 +15,7 @@ Plugins are also kept in the Library (see [Plugins](plugins.md)).
 
 | Kind | Editable | Notes |
 |---|---|---|
-| **Built-in** | No | Comes with the app, for example **Standard Internal** and the **Default Style** Design. |
+| **Built-in** | No | Comes with the app, for example **Standard Internal** and the **Default Style** Design. After 0.1.0-beta.1, Built-in Packs that InterLayer only uses internally (**Canonical Runtime v0.1**) are no longer listed in the Command Browser, the Command Picker or the Pack Manager; Parts that use their Commands keep working. |
 | **User** | Yes | Yours. The starter Packs (**Keyboard**, **Mouse**, **macOS Shortcuts**, **Keyboard Glyphs**, **Standard Icons**) are installed as User Packs. **My Commands** and **User Icons** always exist and cannot be deleted. |
 | **Imported** | No | A Pack you imported from a file. To change it, duplicate its Commands into a User Pack. |
 | **Plugin** | No | The Commands and icons an installed Plugin brings. They appear while the Plugin is enabled. |

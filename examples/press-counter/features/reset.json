@@ -1,0 +1,49 @@
+{
+  "format": "interlayer.aol",
+  "schema_version": 1,
+  "id": "reset",
+  "name": "Reset Count",
+  "description": "Clears the count (api.storage.clear()).",
+  "host_type": "inner",
+  "target": {
+    "target_type": "application",
+    "connection_type": "local_socket",
+    "target_identifier": "com.interlayer.sample.press-counter"
+  },
+  "interaction": {
+    "compatible_interactions": [
+      "single_button"
+    ],
+    "input_kind": "choice",
+    "commit": "release",
+    "input_parameters": {}
+  },
+  "action": {
+    "action_identifier": "counter.reset",
+    "trigger": "commit",
+    "parameters": {},
+    "state_write": "none"
+  },
+  "lifecycle": {
+    "initialize": "on_show",
+    "refresh": "event",
+    "refresh_interval_ms": 1000,
+    "suspend": "on_hide",
+    "error_fallback": "show_last"
+  },
+  "host": {
+    "inner": {
+      "content_type": "value",
+      "overflow_policy": "truncate",
+      "minimum_requirements": {
+        "min_items": 1,
+        "min_zone_size_px": 48
+      }
+    }
+  },
+  "command": {
+    "kind": "action",
+    "name": "Counter Reset Count",
+    "icon_ref": "pitsboard-default:undo"
+  }
+}

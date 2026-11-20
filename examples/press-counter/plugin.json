@@ -1,0 +1,24 @@
+{
+  "format": "interlayer.plugin",
+  "schema_version": 1,
+  "id": "press-counter",
+  "name": "Press Counter",
+  "version": "0.1.0",
+  "description": "A sample of the Built-in API: a script Adapter with no connection that keeps a count in Plugin Storage (api.storage), reads the system output volume through a declared built-in permission (api.builtin), records where the press came from (the Action Context) and offers one-shot Actions (kind action).",
+  "requires": {
+    "interlayer": ">=0.1.0",
+    "icon_packs": [
+      "pitsboard-default"
+    ]
+  },
+  "permissions": {
+    "builtin": [
+      "system_volume.read"
+    ]
+  },
+  "features": [
+    "count",
+    "press",
+    "reset"
+  ]
+}

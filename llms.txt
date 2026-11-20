@@ -32,18 +32,20 @@ Rules for AI assistants: docs/ai-assistant-guide.md
 
 - [Overview](docs/developer-guide/README.md): architecture (features, Sources, Actions, Adapter), workflow
 - [Package structure](docs/developer-guide/package-structure.md): allowed files and folders, limits, .interlayer-plugin ZIP
-- [Manifest](docs/developer-guide/manifest.md): plugin.json keys, settings, setup steps, requires, permissions.builtin (built-in permission groups: system_volume.read/.control, running_apps.read, app.activate, music.read/.control)
-- [Features](docs/developer-guide/features.md): feature file fields, command kinds (value, toggle, collection, display, xy), mapping, data shapes, action templates ({{value}}, {{delta}}, {{item.id}}, {{dx}}, {{dy}})
+- [Manifest](docs/developer-guide/manifest.md): plugin.json keys, settings, setup steps, requires, permissions.builtin (built-in permission groups: system_volume.read/.control, running_apps.read, app.activate, music.read/.control; after 0.1.0-beta.1 also audio_devices.read, input_sources.read/.control, displays.read, power.read, wifi.read, installed_apps.read, apps.control, apps.quit, shortcuts.read)
+- [Features](docs/developer-guide/features.md): feature file fields, command kinds (value, toggle, collection, display, xy; action after 0.1.0-beta.1), mapping, data shapes, action templates ({{value}}, {{delta}}, {{item.id}}, {{dx}}, {{dy}})
 - [Declarative Adapter](docs/developer-guide/declarative-adapter.md): adapter.json connections, HTTP poll/long_poll and WebSocket event Sources, Actions, templates and casts
-- [Script Adapter](docs/developer-guide/script-adapter.md): createAdapter(api), api members, sandbox, lifecycle and timeouts
+- [Script Adapter](docs/developer-guide/script-adapter.md): createAdapter(api), api members, Action Context, api.storage, api.builtin, error codes, sandbox, lifecycle and timeouts
 - [Security](docs/developer-guide/security.md): approval model, built-in permissions (declare + user approval), Keychain secrets, sandbox limits, author rules
 - [Icons](docs/developer-guide/icons.md): bundled icons/icons.json, requires.icon_packs
-- [Testing and distribution](docs/developer-guide/testing-and-distribution.md): Import Folder, approval, error codes, Export
+- [Built-in Sources and Actions](docs/developer-guide/built-in-api.md): every permission group with its ids and data, macOS permissions, app.activate / app.launch and minimized windows, Shortcuts (names only; running is not available), what Plugins cannot use
+- [Testing and distribution](docs/developer-guide/testing-and-distribution.md): Import Folder, approval, update (what is kept), error codes, Export
 
 ## Examples
 
 - [acme-lamp](examples/acme-lamp/): declarative Plugin (toggle, value, display, secret setting)
 - [acme-timer](examples/acme-timer/): script Plugin (relative value, display, api.changed)
+- [press-counter](examples/press-counter/): script Plugin with no connections (api.storage, api.builtin.read, Action Context, action kind); new after 0.1.0-beta.1
 
 ## Optional
 

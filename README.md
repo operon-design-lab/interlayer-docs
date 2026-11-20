@@ -41,6 +41,7 @@ This repository contains the user guide and the Plugin developer guide.
 - [Features](docs/developer-guide/features.md)
 - [Declarative Adapter](docs/developer-guide/declarative-adapter.md)
 - [Script Adapter](docs/developer-guide/script-adapter.md)
+- [Built-in Sources and Actions](docs/developer-guide/built-in-api.md)
 - [Security](docs/developer-guide/security.md)
 - [Icons](docs/developer-guide/icons.md)
 - [Testing and distribution](docs/developer-guide/testing-and-distribution.md)

@@ -16,6 +16,17 @@
 
 Every re-import clears the approval, so approve again after each change.
 
+## Import, update and approval
+
+| Step | What happens |
+|---|---|
+| **Import** (new Plugin) | The preview lists the features, the Adapter type and its script files, connections and hosts, secrets, the built-in permission groups (Read / Control) and the Bridge files. After **Install** the Plugin is **not approved**: nothing of it runs yet. |
+| **Approve** | **Review & Approve…** in Plugin Studio, confirmed in InterLayer's own window. The approval covers every file in `adapter/` and `bridge/`, and `plugin.json`'s `settings`, `requires` and `permissions`. Feature files are not part of it, so editing a feature can never use a group that was not approved. |
+| **Update** (Replace) | The preview shows what changes, including added permission groups and removed features or icons that the user's Projects use. Any change to the approved content withdraws the approval: the Adapter stops until the user approves again. |
+| Kept across an update | Setting values, secrets, and Plugin Storage (new after 0.1.0-beta.1). |
+| **Remove** | The Plugin folder moves to `.trash/`. Its Plugin Storage moves to `.trash/` too. References in Projects stay and show as missing. |
+| **Export** | A `.interlayer-plugin` file. Setting values, secrets, approval and Plugin Storage are never included. |
+
 > Installed Plugins live in `~/Library/Application Support/InterLayer/plugins/`. Always install through **Import**, which runs all package checks; do not copy folders there by hand.
 
 ## Checklist
@@ -23,6 +34,9 @@ Every re-import clears the approval, so approve again after each change.
 - [ ] `plugin.json` id is unique and matches the folder name.
 - [ ] Every feature in `features` has a file, and every file is listed.
 - [ ] Every `source_identifier` / `action_identifier` exists in `adapter.json`, or is a built-in one whose group is in `permissions.builtin`.
+- [ ] Every `api.builtin` call in your script uses an id whose group is in `permissions.builtin`, and `api.builtin.run` is called only inside Actions.
+- [ ] `action` features have fixed `parameters` (no templates).
+- [ ] Your script handles the `.code` of `api.storage` / `api.builtin` errors it expects (see [Script Adapter ▸ Errors](script-adapter.md#errors)).
 - [ ] Every feature with a Source has `mapping.rules`.
 - [ ] Value features: range → `{{value}}`; no range → `step` and `{{delta}}`.
 - [ ] Action request templates name only keys of the feature's `action.parameters`.
@@ -41,7 +55,7 @@ Common causes:
 | `PLUGIN_NOT_INSTALLED` | The Plugin is not installed, disabled, or that feature is invalid. |
 | `PLUGIN_ADAPTER_NOT_APPROVED` / `PLUGIN_ADAPTER_STALE` | The Adapter is not approved, or its files changed since approval. |
 | `PLUGIN_ADAPTER_MISSING_SETTINGS` | A setting used in a connection is empty. |
-| `PLUGIN_ADAPTER_START_FAILED` / `PLUGIN_ADAPTER_CRASHED` | The script failed to start or crashed (InterLayer waits before retrying). |
+| `PLUGIN_ADAPTER_START_FAILED` / `PLUGIN_ADAPTER_CRASHED` | The script failed to start or crashed. InterLayer waits 2 s, doubling up to 60 s, before starting it again. |
 | `PLUGIN_ADAPTER_ERROR` | A script Action threw an error. |
 | `PLUGIN_ACTION_UNAVAILABLE` | The feature's `action_identifier` is not defined. |
 | `PLUGIN_PERMISSION_DENIED` | The feature uses a built-in Source / Action whose permission group is not declared or not approved, or that is not available to Plugins. RUN says: *Its Plugin does not have the permission it needs.* |
@@ -50,6 +64,8 @@ Common causes:
 | `PLUGIN_VALUE_MODE` | Relative input on a ranged feature without `relative_parameters`. |
 
 A failed Source read keeps the last value on screen.
+
+Inside a script, `api.storage` and `api.builtin` failures have their own `.code` values (for example `builtin_permission_denied` with `.reason` and `.permission`). Plugin Studio's Adapter section shows the **Last error**; for anything you catch yourself, write a line with `api.log()` (it goes to InterLayer's log). See [Script Adapter ▸ Errors](script-adapter.md#errors).
 
 ## Distribute
 

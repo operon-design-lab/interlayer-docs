@@ -100,7 +100,7 @@ The keys `trigger`, `state_write`, `update_mode`, `lifecycle` and `target` may a
 | `display` | `source.data_type: "value"` and a Source. No Action. | Data Display |
 | `xy` | An Action using `{{dx}}` and `{{dy}}`. No Source. | XY Pad with Output **Combined** |
 | `outer` | `host_type: "outer"` and a Source | Single Button (opens a separate window). Not covered in this guide. |
-| `action` | — | Reserved. It is validated but **generates no Command** in this version. Do not use it. |
+| `action` | An Action with fixed `parameters`. No Source, no State. | Single Button, Grid / Slide Buttons, Dial Select, Area Radial: one run per use. Not Data Display. **New after 0.1.0-beta.1:** in 0.1.0-beta.1 this kind generates no Command. |
 
 ### `command` options
 
@@ -126,6 +126,7 @@ What your mapping should produce for each kind:
 | `toggle` | `value`: `true`, `"true"` or `1` means **on**; any other value means off; missing means unknown |
 | `collection` | `items[]`, each `{ id, label, icon, selected }`. `id` is what the Action receives as `{{item.id}}` (if you do not map `id`, items get `item-1`, `item-2`, …). `icon` must be a `data:image/…` URL. Items without an icon show a text tile. |
 | `display` | `value` (booleans show On/Off, numbers are rounded to one decimal), or the fields named in `lines`. With `display: "image"`: an `image` field matching `data:image/(png\|jpeg\|gif\|webp);base64,…` |
+| `action` | Nothing: an `action` feature has no State. |
 
 When the Adapter cannot reach the app, a declarative Source returns its `offline` object plus `connected: false` (see [Declarative Adapter](declarative-adapter.md)), so you can map an "offline" text into a display line.
 
@@ -170,7 +171,18 @@ Choose: a value with natural ends (volume 0–100) → range. A value without en
 
 ## A one-shot button
 
-There is no "action" kind yet. For a stateless button (for example *Next Track*), use `toggle`: give both states the same label and icon, and map no `value`. RUN shows a short press highlight and returns on the next read.
+*New after 0.1.0-beta.1.* Use the `action` kind for a stateless button (for example *Next Track*, *Open Notes*). Its Action runs **once each time the Command runs**: one Single Button press, one Grid cell, one Radial slice. When that happens depends on the Part's Commit Method, as for any other Command.
+
+```json
+"action": { "action_identifier": "player.next", "parameters": {} },
+"command": { "kind": "action", "name": "Next Track", "icon_ref": "pitsboard-default:skip_next" }
+```
+
+- `action.parameters` are fixed. `{{value}}`, `{{delta}}`, `{{dx}}`, `{{dy}}` and `{{item.…}}` are validation errors.
+- The Command has no State: RUN reads nothing for it, and it cannot be put on a Data Display. A `source` in the file is allowed and ignored.
+- A script Action receives the [Action Context](script-adapter.md#the-action-context) as its second argument.
+
+**In 0.1.0-beta.1**, and for features you have already published, use a `toggle` instead: give both states the same label and icon, and map no `value`. RUN shows a short press highlight and returns on the next read. Do not change the kind of a published feature: users' Bindings use its Command as that kind.
 
 ```json
 "source": { "data_type": "value", "source_identifier": "player.state" },

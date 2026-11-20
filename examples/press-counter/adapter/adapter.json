@@ -1,0 +1,20 @@
+{
+  "format": "interlayer.adapter",
+  "schema_version": 1,
+  "type": "script",
+  "entry": "adapter.mjs",
+  "connections": [],
+  "sources": {
+    "counter.state": {
+      "description": "The count, its text, and the Part, time and system volume of the last press."
+    }
+  },
+  "actions": {
+    "counter.press": {
+      "description": "Adds one to the count."
+    },
+    "counter.reset": {
+      "description": "Clears the count."
+    }
+  }
+}

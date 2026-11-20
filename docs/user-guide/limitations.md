@@ -17,5 +17,6 @@ The following are **not available** in the current beta. Do not plan a setup tha
 | Windows or Linux | macOS (Apple Silicon) only. |
 | Intel Macs | Apple Silicon only. |
 | Built-in AI features | InterLayer does not generate Commands, icons or images. |
+| Running a macOS shortcut from a Plugin | Plugins can read the names of your shortcuts (after 0.1.0-beta.1) but cannot run them. Use a CLI Command (`shortcuts run "<name>"`). |
 
 Sidecar touch input is supported, but touch behaviour with external USB touchscreens has not been documented for this beta.

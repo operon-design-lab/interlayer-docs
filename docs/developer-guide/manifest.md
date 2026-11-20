@@ -39,7 +39,7 @@ There is no JSON Schema file; InterLayer validates the manifest when it loads or
 | `settings` | no | Up to 32 settings. See below. |
 | `setup` | no | Up to 16 setup steps. See below. |
 | `requires` | no | Object. See below. |
-| `permissions` | no | Object with `builtin`: the built-in permission groups your features use. See below. |
+| `permissions` | no | Object with `builtin`: the built-in permission groups your Plugin uses (features and script). See below. |
 
 ## `settings`
 
@@ -90,24 +90,36 @@ There is no way to declare a dependency on another Plugin or on a Command Pack.
 
 ## `permissions.builtin`
 
-Besides your own Adapter, a feature can use a few of InterLayer's **built-in** Sources and Actions on the user's Mac. It can do so only when your Plugin declares the matching **permission group** and the user approves it.
+Besides your own Adapter, a Plugin can use some of InterLayer's **built-in** Sources and Actions on the user's Mac: from a feature, or from a script Adapter through [`api.builtin`](script-adapter.md#built-in-calls-apibuiltin). It can do so only when your Plugin declares the matching **permission group** and the user approves it.
 
 ```json
 "permissions": { "builtin": ["system_volume.read", "system_volume.control"] }
 ```
 
-| Group | Access | Lets a feature use |
-|---|---|---|
-| `system_volume.read` | read | Source `macos.output_volume`: the system output volume and mute state |
-| `system_volume.control` | control | Actions `volume.set` (parameter `value`, 0–100) and `volume.toggle_mute` |
-| `running_apps.read` | read | Source `macos.running_apps`: the running apps (names, icons, which one is in front) |
-| `app.activate` | control | Action `app.activate` (parameter `bundle_id`): bring a running app to the front |
-| `music.read` | read | Source `music.player`: the Music app's player state and current track |
-| `music.control` | control | Actions `music.play_pause`, `music.next_track`, `music.previous_track`, `music.set_position`, `music.toggle_shuffle`, `music.set_repeat`, `music.set_volume` |
+| Group | Access | Lets your Plugin use | |
+|---|---|---|---|
+| `system_volume.read` | read | Source `macos.output_volume`: the system output volume and mute state | |
+| `system_volume.control` | control | Actions `volume.set` (parameter `value`, 0–100) and `volume.toggle_mute` | |
+| `running_apps.read` | read | Source `macos.running_apps`: the running apps (names, icons, which one is in front) | |
+| `app.activate` | control | Action `app.activate` (parameter `bundle_id`): bring a running app to the front | |
+| `music.read` | read | Source `music.player`: the Music app's player state and current track | |
+| `music.control` | control | Actions `music.play_pause`, `music.next_track`, `music.previous_track`, `music.set_position`, `music.toggle_shuffle`, `music.set_repeat`, `music.set_volume` | |
+| `audio_devices.read` | read | Sources `macos.audio_devices`, `macos.input_volume`, `macos.input_mute`: sound devices, which are in use, input volume and mute | new |
+| `input_sources.read` | read | Source `macos.input_sources`: keyboard input sources and the selected one | new |
+| `input_sources.control` | control | Action `input.select`: switch the keyboard input source | new |
+| `displays.read` | read | Source `macos.displays`: connected displays (names, sizes, arrangement) | new |
+| `power.read` | read | Source `macos.power`: battery level, charging, power source, Low Power Mode | new |
+| `wifi.read` | read | Source `macos.wifi_state`: whether Wi-Fi is on (never the network name) | new |
+| `installed_apps.read` | read | Source `macos.installed_apps`: installed apps (names and bundle ids) | new |
+| `apps.control` | control | Actions `app.launch`, `app.hide`, `app.unhide`: open an app, hide it, show it again | new |
+| `apps.quit` | control | Action `app.quit`: quit an app (the app may ask to save) | new |
+| `shortcuts.read` | read | Source `macos.shortcuts`: the names of the user's shortcuts | new |
+
+Groups marked **new** were added after 0.1.0-beta.1 and are **not in that build**. Data shapes and parameters: [Built-in Sources and Actions](built-in-api.md).
 
 - **Read** groups only show information on the overlay. **Control** groups change something on the Mac when the user uses one of your Parts. A feature that shows a state and changes it needs both (for example `system_volume.read` and `system_volume.control`).
-- Declare only what your features use. Unknown group names, duplicates and any other key under `permissions` are errors; an invalid declaration grants nothing.
+- Declare only what your Plugin uses. Unknown group names, duplicates and any other key under `permissions` are errors; an invalid declaration grants nothing.
 - The declaration is part of the approved content: users approve it in Plugin Studio (also when your Plugin has no `adapter/`), and any change to it requires a new approval. See [Security](security.md#built-in-permissions).
-- A feature whose built-in Source or Action is not covered by a declared and approved group does not run (`PLUGIN_PERMISSION_DENIED`). Your other features keep working.
-- Built-in Sources and Actions that are not in this table cannot be used by your Plugin, even if you know their names.
+- A feature whose built-in Source or Action is not covered by a declared and approved group does not run (`PLUGIN_PERMISSION_DENIED`). Your other features keep working. A script call fails with `builtin_permission_denied`.
+- Built-in Sources and Actions that are not in this table cannot be used by your Plugin, even if you know their names. This includes the capabilities InterLayer's own macOS System Plugin keeps for itself (audio device switching, Wi-Fi on/off, window control) and **running a shortcut**, which has no group. See [Not available to Plugins](built-in-api.md#not-available-to-plugins).
 - The `music.*` groups make macOS ask the user for Automation permission for the Music app on first use.

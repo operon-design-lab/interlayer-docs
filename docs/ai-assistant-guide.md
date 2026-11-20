@@ -13,7 +13,8 @@ This page is for AI assistants that help people use InterLayer or build InterLay
 7. InterLayer is configured in its own UI. Do not write Project files (`project.json`, `profile_*.json`) by hand for the user; give step-by-step UI instructions instead.
 8. For Plugins, follow the Developer Guide exactly: field names, kinds, template names and limits. Start from the examples. Prefer a declarative Adapter.
 9. Never put secrets in Plugin files; use `secret` settings.
-10. A Plugin may use InterLayer's built-in Sources / Actions only through the groups in [`permissions.builtin`](developer-guide/manifest.md#permissionsbuiltin). Declare only the groups the features use, never suggest other built-in names, and remind the user that the Plugin must be approved in Plugin Studio before those features run.
+10. A Plugin may use InterLayer's built-in Sources / Actions only through the groups in [`permissions.builtin`](developer-guide/manifest.md#permissionsbuiltin) (ids: [Built-in Sources and Actions](developer-guide/built-in-api.md)). Declare only the groups the Plugin uses, never suggest other built-in names, and remind the user that the Plugin must be approved in Plugin Studio before those features run. A Plugin cannot run a macOS shortcut, switch audio devices, toggle Wi-Fi or control windows.
+11. Features marked **new after 0.1.0-beta.1** (the `action` kind, the Action Context, `api.storage`, `api.builtin`, the newer permission groups) are not in 0.1.0-beta.1. Ask which InterLayer version the user has before relying on them.
 
 ## Where to look
 

@@ -9,13 +9,16 @@
 
 ## Built-in permissions
 
-A Plugin can use some of InterLayer's own macOS capabilities (system volume, running apps, the Music app) only through the permission groups it declares in [`permissions.builtin`](manifest.md#permissionsbuiltin).
+A Plugin can use some of InterLayer's own macOS capabilities (system volume, running apps, the Music app, and after 0.1.0-beta.1 also audio devices, input sources, displays, power, Wi-Fi state, installed apps, opening / hiding / quitting apps and shortcut names) only through the permission groups it declares in [`permissions.builtin`](manifest.md#permissionsbuiltin). The full list is in [Built-in Sources and Actions](built-in-api.md).
 
 - The user sees the requested groups, split into **Read** and **Control**, in the Import preview and in the approval dialog, and approves them in Plugin Studio's **Built-in Permissions** section (together with the Adapter, if there is one).
 - A Plugin with no `adapter/` that declares built-in permissions must be approved too.
-- InterLayer checks the declaration and the approval every time a feature reads or runs a built-in Source or Action — for overlay states, Commands, Plugin windows and previews. Anything not declared, not approved, or not available to Plugins is refused, and only the affected feature stops.
+- InterLayer checks the declaration and the approval every time a feature reads or runs a built-in Source or Action — for overlay states, Commands, Plugin windows and previews — and every time a script calls `api.builtin` (new after 0.1.0-beta.1). Anything not declared, not approved, or not available to Plugins is refused, and only the affected feature or call fails.
+- InterLayer, not the script, decides which Plugin a script call belongs to, so a script cannot borrow another Plugin's approval.
+- A script can **change** something on the Mac (`api.builtin.run`) only while one of its Actions runs, that is, after the user used one of its Parts. Source reads, previews and `start()` can only read.
 - Changing the declaration (for example in an update) requires a new approval. Editing a feature cannot reach anything beyond the approved groups.
-- Built-in capabilities that belong to InterLayer's own Plugins (for example quitting apps, window control, audio devices) are not available to other Plugins.
+- Built-in capabilities that belong to InterLayer's own macOS System Plugin (switching audio devices, setting input volume or mute, Wi-Fi on/off, window information and control) are not available to other Plugins. Running a shortcut is not available to any Plugin. See [Not available to Plugins](built-in-api.md#not-available-to-plugins).
+- macOS permissions such as Accessibility or Automation belong to InterLayer as a whole. Once the user allowed one, every approved Plugin with the matching group can use it.
 
 ## Secrets
 
@@ -29,13 +32,15 @@ A Plugin can use some of InterLayer's own macOS capabilities (system volume, run
 
 A script Adapter runs in its own process with the Node permission model: it cannot write files, start processes or read files outside its `adapter/` folder, and it sees only `TMPDIR` in its environment.
 
-It is **not** an operating-system sandbox, and **network access is not restricted**. Users must trust the author of a Plugin they approve.
+It is **not** an operating-system sandbox, and **network access is not restricted**. Users must trust the author of a Plugin they approve. Because the network is open, anything a script can read — including built-in Sources under a read group — could be sent to the author. Approve read groups with the same care as control groups.
+
+**Plugin Storage** (`api.storage`, new after 0.1.0-beta.1) is plain text on the user's Mac. It is never exported, and removing the Plugin moves it to `.trash/`. Do not store secrets there.
 
 ## Rules for Plugin authors
 
 1. Connect only to the app on the user's Mac (`127.0.0.1` / `localhost`) and only through connections declared in `adapter.json`. Do not send data anywhere else.
 2. Request only the secrets you need. Never log, return or store secret values.
-3. Request only the built-in permission groups your features use, and prefer read groups when you do not need to change anything.
+3. Request only the built-in permission groups your Plugin uses, and prefer read groups when you do not need to change anything. Say in your README why you need each group.
 4. Prefer a declarative Adapter. Use a script Adapter only when needed, and keep it small and readable — users may review it before approving.
 5. Do not include binaries, installers or archives (archives are refused anyway). Anything the user must install into the target app goes in `bridge/`, with clear `setup` instructions.
 6. Keep ids stable across versions (Plugin id, feature ids, icon ids), so users' Projects keep working after an update.

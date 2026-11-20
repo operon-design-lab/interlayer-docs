@@ -4,7 +4,7 @@ InterLayer asks for a permission only when a feature needs it, not at startup.
 
 | Permission | When it is needed | When macOS asks |
 |---|---|---|
-| **Accessibility** | Sending keyboard shortcuts, mouse clicks and scrolls, media keys and text from Commands. Window controls of the macOS System Plugin. | The first time such a Command runs. |
+| **Accessibility** | Sending keyboard shortcuts, mouse clicks and scrolls, media keys and text from Commands. Window controls of the macOS System Plugin. After 0.1.0-beta.1: bringing back a minimized window from Running Apps / Launch App. | The first time such a Command runs. |
 | **Automation** (Apple Events) | Controlling the Music app with the Apple Music Plugin. | The first time a Music feature is used. |
 | **Notifications** | The "new version available" notice. | Optional. If you refuse, InterLayer simply does not show the notice. |
 | **Keychain** | Storing secrets that Plugins use (for example a password for a local app). | Used by Plugins that declare secrets. |

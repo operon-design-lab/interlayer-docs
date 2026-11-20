@@ -75,6 +75,8 @@ Use **RUN Menu ▸ Input Troubleshooting** (also in RUN Settings ▸ General ▸
 | Import refuses a Plugin | Read the reason in the preview. Common causes: files or folders not allowed in a Plugin, hidden files, `plugin.json` not at the root of the ZIP, or a Plugin id that belongs to a built-in Plugin. See [Package structure](developer-guide/package-structure.md). |
 | A Plugin's icons show a placeholder | An Icon Pack the Plugin uses is not installed. Plugin Studio lists the missing Packs. |
 | An imported Profile shows missing Commands | The Import Summary listed *Plugins required*. Install those Plugins. |
+| Running Apps / Launch App brings the app forward, but its minimized window stays in the Dock | After 0.1.0-beta.1, InterLayer brings back one window only when **all** of that app's windows are minimized, and only with Accessibility permission (System Settings ▸ Privacy & Security ▸ Accessibility). In 0.1.0-beta.1 it never does; click the window in the Dock. |
+| A Plugin's saved data is gone after removing and reinstalling it | Removing a Plugin moves its Plugin Storage to `plugins/.trash/`. An update (Replace) keeps it. |
 
 ## Updates
 

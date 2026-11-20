@@ -1,0 +1,93 @@
+{
+  "format": "interlayer.aol",
+  "schema_version": 1,
+  "id": "count",
+  "name": "Press Count",
+  "description": "How many times Press ran, kept in Plugin Storage (it survives the Adapter stopping and InterLayer restarting).",
+  "host_type": "inner",
+  "target": {
+    "target_type": "application",
+    "connection_type": "local_socket",
+    "target_identifier": "com.interlayer.sample.press-counter"
+  },
+  "source": {
+    "data_type": "value",
+    "source_identifier": "counter.state",
+    "update_mode": "push",
+    "poll_interval_ms": 1000,
+    "items_path": "items",
+    "available_fields": [
+      {
+        "name": "count",
+        "type": "number"
+      },
+      {
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "name": "last_part",
+        "type": "string"
+      },
+      {
+        "name": "last_at",
+        "type": "string"
+      },
+      {
+        "name": "last_volume",
+        "type": "number"
+      }
+    ]
+  },
+  "mapping": {
+    "rules": [
+      {
+        "source_field": "text",
+        "destination_field": "label",
+        "transform": "none",
+        "fallback": ""
+      },
+      {
+        "source_field": "count",
+        "destination_field": "value",
+        "transform": "none",
+        "fallback": ""
+      }
+    ]
+  },
+  "interaction": {
+    "compatible_interactions": [
+      "single_button"
+    ],
+    "input_kind": "none",
+    "commit": "release",
+    "input_parameters": {}
+  },
+  "action": {
+    "action_identifier": "",
+    "trigger": "commit",
+    "parameters": {},
+    "state_write": "none"
+  },
+  "lifecycle": {
+    "initialize": "on_show",
+    "refresh": "event",
+    "refresh_interval_ms": 1000,
+    "suspend": "on_hide",
+    "error_fallback": "show_last"
+  },
+  "host": {
+    "inner": {
+      "content_type": "value",
+      "overflow_policy": "truncate",
+      "minimum_requirements": {
+        "min_items": 1,
+        "min_zone_size_px": 48
+      }
+    }
+  },
+  "command": {
+    "kind": "display",
+    "name": "Press Count"
+  }
+}

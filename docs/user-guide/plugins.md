@@ -11,6 +11,8 @@ A Plugin adds live Commands for macOS or another app. Unlike ordinary Commands, 
 
 The starter **Music(Default)** Profile uses the Apple Music Plugin. macOS asks for Automation permission the first time (see [Permissions](../getting-started/permissions.md)). Window controls of macOS System need Accessibility permission.
 
+**Running Apps** and **Launch App** bring the chosen app to the front (Launch App opens it first if needed). After 0.1.0-beta.1, they also bring back one of its windows when **all** of that app's windows are minimized, as a click on its Dock icon does. Windows are never moved or resized, and no other app is touched. This needs Accessibility permission; without it, the app still comes to the front.
+
 ## Using Plugin Commands
 
 Each Plugin brings a read-only Command Pack named *"<Plugin name> (Plugin)"*. Pick its Commands in the Command Browser like any other Command. What a Command can do depends on its kind:
@@ -22,6 +24,7 @@ Each Plugin brings a read-only Command Pack named *"<Plugin name> (Plugin)"*. Pi
 | **Collection** | Running Apps, Output Device | Grid / Slide Buttons with **Content Source: Auto** (one cell per item), Data Display |
 | **Display** | Battery Level, Track Title | Data Display |
 | **XY** | — | XY Pad with Output **Combined** |
+| **Action** | — (new after 0.1.0-beta.1) | Single Button, Grid / Slide Buttons, Dial Select, Area Radial: runs once per use, shows no State |
 
 Studio offers only the Commands that fit the selected Interaction.
 
@@ -47,7 +50,7 @@ InterLayer runs neither until you approve them:
 2. Review its **Built-in Permissions** and, if it has one, its **Adapter** section (what it connects to and which secrets it receives).
 3. Click **Review & Approve…** and confirm in InterLayer's confirmation window.
 
-Approval covers exactly what you reviewed. If the Plugin is updated (re-imported) or its permissions change, you approve it again. **Revoke Approval** withdraws it. A feature whose permission is missing or not approved does not run; the Plugin's **Built-in Permissions** section lists those features and why. The built-in Plugins (macOS System, Apple Music) need no approval.
+Approval covers exactly what you reviewed. If the Plugin is updated (re-imported) or its permissions change, you approve it again. An update keeps the Plugin's settings, secrets and its saved data (Plugin Storage, after 0.1.0-beta.1). **Revoke Approval** withdraws it. A feature whose permission is missing or not approved does not run; the Plugin's **Built-in Permissions** section lists those features and why. The built-in Plugins (macOS System, Apple Music) need no approval.
 
 > Only install and approve Plugins from sources you trust. An approved script Adapter runs as a separate process on your Mac. See [Security](../developer-guide/security.md) for what Plugins can and cannot do.
 

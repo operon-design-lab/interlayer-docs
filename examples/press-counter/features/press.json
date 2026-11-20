@@ -1,0 +1,49 @@
+{
+  "format": "interlayer.aol",
+  "schema_version": 1,
+  "id": "press",
+  "name": "Press",
+  "description": "Adds one to the count. A one-shot Action (kind action): each run of the Command runs it once.",
+  "host_type": "inner",
+  "target": {
+    "target_type": "application",
+    "connection_type": "local_socket",
+    "target_identifier": "com.interlayer.sample.press-counter"
+  },
+  "interaction": {
+    "compatible_interactions": [
+      "single_button"
+    ],
+    "input_kind": "choice",
+    "commit": "release",
+    "input_parameters": {}
+  },
+  "action": {
+    "action_identifier": "counter.press",
+    "trigger": "commit",
+    "parameters": {},
+    "state_write": "none"
+  },
+  "lifecycle": {
+    "initialize": "on_show",
+    "refresh": "event",
+    "refresh_interval_ms": 1000,
+    "suspend": "on_hide",
+    "error_fallback": "show_last"
+  },
+  "host": {
+    "inner": {
+      "content_type": "value",
+      "overflow_policy": "truncate",
+      "minimum_requirements": {
+        "min_items": 1,
+        "min_zone_size_px": 48
+      }
+    }
+  },
+  "command": {
+    "kind": "action",
+    "name": "Counter Press",
+    "icon_ref": "pitsboard-default:touch_app"
+  }
+}

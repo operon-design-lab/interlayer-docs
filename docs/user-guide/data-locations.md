@@ -28,7 +28,7 @@ Everything else is in:
 | `icon-packs/` | Icon Packs (`icon-packs/user` is User Icons) |
 | `image-packs/` | Image Packs |
 | `design-packs/` | Your Design Packs |
-| `plugins/` | Plugins you installed, their settings and approvals |
+| `plugins/` | Plugins you installed, their settings and approvals. After 0.1.0-beta.1 also `.plugin-storage/` (each Plugin's saved data, plain text) |
 | `logs/` | Input Diagnostics reports |
 | `*.json` | RUN preferences, recent Projects and other app settings |
 

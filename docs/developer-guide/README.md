@@ -3,6 +3,8 @@
 A **Plugin** brings live Commands for another app into InterLayer. A Plugin Command can **read** state from the app (a value, an on/off state, a list, text or an image) and **send** actions to it. Users bind Plugin Commands to Parts in Studio like any other Command.
 
 > The Plugin platform is in **alpha** in the current beta (0.1.0-beta.1). File formats are versioned (`schema_version: 1`), but details may change in later releases.
+>
+> **New after 0.1.0-beta.1** (not in that build): the `action` kind, the Action Context, `api.storage`, `api.builtin`, ten more built-in permission groups, and restoring minimized windows in `app.activate` / `app.launch`. Pages mark these where they appear.
 
 ## How a Plugin works
 
@@ -19,7 +21,7 @@ A **Plugin** brings live Commands for another app into InterLayer. A Plugin Comm
 - The **Adapter** (`adapter/`) implements the **Sources** (reads) and **Actions** (writes) that features refer to by identifier. It is either:
   - **declarative** — JSON only. InterLayer itself makes the HTTP or WebSocket requests you describe. Use this first.
   - **script** — a JavaScript module (`.mjs`) that InterLayer runs in a separate, restricted Node process. Use it when you need protocol logic (authentication handshakes, translating messages).
-- A feature can also use a few of InterLayer's **built-in** Sources and Actions (system volume, running apps, the Music app) through [permission groups](manifest.md#permissionsbuiltin) your Plugin declares.
+- A feature can also use some of InterLayer's **built-in** Sources and Actions (system volume, running apps, the Music app, and after 0.1.0-beta.1 more macOS capabilities) through [permission groups](manifest.md#permissionsbuiltin) your Plugin declares. A script Adapter can call them too, with `api.builtin` (new after 0.1.0-beta.1). See [Built-in Sources and Actions](built-in-api.md).
 - The user must **approve** the Adapter and the built-in permissions in Plugin Studio before they run.
 
 ## What you need
@@ -48,11 +50,12 @@ If the app can already be controlled with keyboard shortcuts, you do not need a 
 | [Manifest (`plugin.json`)](manifest.md) | Every key, settings, setup steps, requirements |
 | [Features](features.md) | Feature files, Command kinds, mapping, action templates, data shapes |
 | [Declarative Adapter](declarative-adapter.md) | `adapter.json` for HTTP and WebSocket without code |
-| [Script Adapter](script-adapter.md) | `createAdapter(api)`, the `api` object, sandbox and lifecycle |
+| [Script Adapter](script-adapter.md) | `createAdapter(api)`, the `api` object, Action Context, Plugin Storage, built-in calls, errors, sandbox and lifecycle |
+| [Built-in Sources and Actions](built-in-api.md) | Permission groups, ids and data, macOS permissions, activating and opening apps, Shortcuts, what is not available |
 | [Security](security.md) | Approval, secrets, sandbox limits, rules for Plugin authors |
 | [Icons](icons.md) | Bundling icons and using other Icon Packs |
-| [Testing and distribution](testing-and-distribution.md) | Installing, approving, testing, error codes, exporting |
-| [Examples](../../examples/) | `acme-lamp` (declarative) and `acme-timer` (script) |
+| [Testing and distribution](testing-and-distribution.md) | Installing, approving, updating, testing, error codes, exporting |
+| [Examples](../../examples/) | `acme-lamp` (declarative), `acme-timer` (script) and `press-counter` (script: storage, built-in calls, `action` kind) |
 
 ## Quick start: the smallest useful Plugin
 
